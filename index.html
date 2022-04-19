@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetBytes</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+      
+    header, main, footer {
+      padding-left: 300px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+
+    .dropbtn {
+  background-color: black;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: rgb(44, 43, 43);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* set the size and position of button on web */
+.button {
+     padding: 10px 30px;
+     font-size: 15px;
+}
+/* provide css to background of list items */ 
+#list-items {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 135px;
+}
+/* provide css to list items */ 
+#list-items a {
+     display: block;
+     font-size: 13px;
+     background-color: black;
+     color: white;
+     text-decoration: none;
+     padding: 3px;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+#list-items a:hover{background-color: rgb(44, 43, 43);}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 30%;
+  font-size: 16px;
+  padding: 5px 5px 5px 5px;
+  border: 1px solid black;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: rgb(251, 248, 248);
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+    .game-tile{
+      padding:5px;
+    }
+
+    .game-tile > div {
+      border-radius: 25px;
+      height: 150px;
+      box-sizing: border-box;
+    }
+    </style>  
+</head>
+<body>
+  <header>
+    <nav style="background-color: black;">
+      <div class="nav-wrapper">
+        <input style="color: white;" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search here..." title="Type in a name">
+        <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons"></i></a>
+        <a href="#" class="brand-logo center w3-serif"><bold>BudgetBytes</bold></a>
+      </div>
+    </nav>
+
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+    
+        <nav style="padding-left: 10px; background-color:black;" >
+          <span class="white-text" ><bold>BudgetBytes</bold></span>
+        </nav>
+         
+        <li><a href="#!">Home</a></li>
+        <li><a href="#!">Recipes</a></li>
+        <li><a href="#!">About</a></li>
+        <li><a href="#!">Subscribe</a></li>
+      </ul>
+
+      <nav style="background-color: black;">
+        <ul>
+         <li>
+         <div class="dropdown">
+           <button onclick="show_hide()" class="dropbtn">Recipe</button>
+            <center>
+               <!-- dropdown list items will show when we click the drop button --> 
+               <div id="list-items" style="display: none;">
+                 
+                  <a href="#Pasta"> Pasta </a>
+                  <a href="#recipe"> Vegan meals </a>
+                  <a href="#recipe"> Sandwiches </a>
+                  <a href="#recipe"> One pot meals </a>
+                  <a href="#recipe"> Deserts </a>
+                  <a href="#recipe"> Appetizers </a>
+   
+               </div>
+            </center>
+           </div></li>
+         
+           <li><a href="#about">About</a></li>
+           <li><a href="#subscribe">Subscribe</a></li>
+         </ul>
+       </nav>
+   </header>
+
+   <script>
+    //show and hide dropdown list item on button click
+    function show_hide() {
+       var click = document.getElementById("list-items");
+       if(click.style.display ==="none") {
+          click.style.display ="block";
+       } else {
+          click.style.display ="none";
+       } 
+    }
+  </script>
+
+<script>
+  function myFunction() {
+      var input, filter, ul, li, a, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("myUL");
+      li = ul.getElementsByTagName("li");
+      for (i = 0; i < li.length; i++) {
+          a = li[i].getElementsByTagName("a")[0];
+          txtValue = a.textContent || a.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              li[i].style.display = "";
+          } else {
+              li[i].style.display = "none";
+          }
+      }
+  }
+  </script>
+  
+    
+        
+      <main class="container">
+        <h1>Browse Recipes</h1>
+
+        <section class="row">
+          
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center w3-serif">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+
+          <div class="col s7 m4 game-tile">
+            <div class="card-panel card-panel black center">
+              <img src="/w3images/sandwich.jpg" alt="Sandwich" style="width:100%">
+              <span class="white-text">
+                Recipe
+                <p>Just some random text, lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+              </span>
+            </div>  
+          </div>
+        </section>
+
+        <section id="about">
+          <div class="w3-container w3-padding-32 w3-center">  
+            <h3>About US</h3><br>
+            <img src="/w3images/chef.jpg" alt="Us" class="w3-image" style="display:block;margin:auto" width="800" height="533">
+            <div class="w3-padding-32">
+              <h4><b>Our Website</b></h4>
+              <h6><i>catch phrase</i></h6>
+              <p>description of why we made this website (ie for broke college kids)</p>
+            </div>
+          </div>
+          <hr>
+        </section>
+        <!-- Form Data -Emelia -->
+        <section id="subscribe">
+          <h1>Subscribe</h1>
+          <form id="formSub">
+            <label for="email">Email</label>
+            <input name="email" type="email" placeholder="Your Email..." required>
+                <br>
+                <label for="message">
+                    Message:
+                    <textarea id="message" name="message" placeholder="Give Us Some Feedback!" rows="3" cols="20"></textarea>
+                </label><br><br>
+
+                <input type="submit" value="Submit">
+          </form>
+      </section>
+      <!--  End Form -->
+      </main>
+
+      <footer class="w3-row-padding w3-padding-32">
+        <div class="w3-third">
+          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          <p>Powered by Uwi stress </p>
+        </div>
+      
+        <div class="w3-third">
+          <h3>Other recipes</h3>
+          <ul class="w3-ul w3-hoverable">
+            <li class="w3-padding-16">
+              <img src="/wimages/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
+              <span class="w-large">Lorem</span><br>
+              <span>Sed mattis nunc</span>
+            </li>
+            <li class="w-padding-16">
+              <img src="/images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
+              <!-- replace all images with our ownnn-->
+              <span class="w3-large">Ipsum</span><br>
+              <span>Praes tinci sed</span>
+            </li> 
+          </ul>
+        </div>
+    
+        <div class="w3-third w3-serif">
+         <section id="Pasta">
+           <h1>Pasta</h1>
+           
+           <div class="card">
+                <div class="card-image">
+                    <img class="black">  
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><p>Shrimp Alfredo Pasta</p></span>
+             <img src="https://recipe.ishmaeljup.repl.co/Pasta1.jpg" />
+            <p>Ingredients:</p>
+		            <ul>
+		              <li>1/2 lb. medium shrimp, peeled and deveined</li>
+                  <li>1/2 lb. fettuccine</li>
+                  <li>2 tbsp butter, divided</li>
+                  <li>4 cloves garlic, minced</li>
+                  <li>1 cup heavy cream </li>
+                  <li>3/4 cup Parmesan* </li>
+                  <li>1/8 tsp salt (or to taste) </li>
+                  <li>1/4 tsp freshly cracked pepper (or to taste)</li>
+                  <li>1Tbsp chopped fresh parsley (optional)</li>
+                  
+		            </ul>
+              <p>Instructions: </p>
+		          <ol>
+		            <li>If your shrimp is frozen, thaw and peel before beginning. You can remove the tails or leave the tails on, if you prefer.</li>
+		            <li>Bring a pot of water to a boil for the fettuccine. Once boiling, add the fettuccine and boil until tender (7-10 minutes). Reserve a ½ cup of the starchy water before draining the pasta in a colander.</li>
+		            <li>While the fettuccine is boiling, prepare the shrimp and alfredo sauce. Place the peeled shrimp on a cutting board and pat dry with a paper towel. Season the shrimp with a pinch of salt and pepper.</li>
+                <li>Add 1 tablespoon butter to a large skillet and heat over medium. Once hot, swirl to coat the surface of the skillet with butter. Add the shrimp and cook for 1-2 minutes on each side, or just until opaque and pink (do not overcook the shrimp). Transfer the cooked shrimp to a clean bowl.</li>
+                <li>Reduce the heat to medium-low. Add 1 tablespoon butter to the skillet along with the minced garlic. Sauté the garlic for 1-2 minutes, or just until it is very fragrant but not brown.</li>
+                <li>Add the heavy cream to the skillet and whisk to dissolve any browned bits off the bottom of the skillet. Allow the cream to come up to a simmer.</li>
+                <li>Whisk the Parmesan into the hot cream until melted. Season the sauce with salt and pepper.</li>
+                <li>Add the cooked and drained pasta and cooked shrimp back to the skillet with the sauce (make sure to add any liquid from the bowl of shrimp). Toss everything until coated in sauce. If the sauce becomes too thick or dry, add some of the reserved pasta water to loosen it up.</li>
+                <li>Taste the pasta and add more salt or pepper if needed. Top with chopped fresh parsley and serve!</li>
+              </ol>
+          </article> 
+            </div>
+           </div>
+              <br><br>
+
+             
+          <div class="card">
+                <div class="card-image">
+                    <img class="black">  
+                </div>
+                <div class="card-content">
+                  <img src="https://recipe.ishmaeljup.repl.co/Picture9.jpg" />
+                    <span class="card-title"><p>Extra Cheesy Homemade Mac and Cheese</p></span>
+            
+            <p>Ingredients:</p>
+		            <ul>
+		              <li>8 oz. macaroni </li>
+                  <li>3 Tbsp butter </li>
+                  <li>3 Tbsp all-purpose flour </li>
+                  <li>1/2 tsp onion powder </li>
+                  <li>2 cups whole milk  </li>
+                  <li>1/2 tsp hot sauce*  </li>
+                  <li>8 oz. block sharp cheddar, shredded </li>
+               
+		            </ul>
+              <p>Instructions: </p>
+		          <ol>
+		            <li>Cook the macaroni according to the package directions (boil for 7-8 minutes, or until tender). Drain the macaroni in a colander..</li>
+		            <li>Place the butter, flour, and onion powder in a medium pot. Whisk and heat over medium until the butter is melted and the mixture begins to bubble. Once bubbling, continue to whisk and cook for one minute.</li>
+		            <li>After cooking the butter and flour roux, whisk in the milk. Continue to cook and whisk over medium heat until the milk begins to gently simmer, at which point it will thicken to the consistency of heavy cream or gravy.</li>
+                <li>Turn the burner off. Season the white sauce with the salt and hot sauce.Begin to add the shredded cheddar, one handful at a time, whisking it in until completely melted before adding more.</li>
+                <li>Add the cooked and drained pasta to the pot with the cheese sauce and stir to combine. Serve the mac and cheese hot and enjoy!.</li>
+    
+              </ol>
+          </article> 
+            </div>
+          </div>
+        </div>
+              <br><br>
+
+
+         </section>
+        </div>
+
+  
+            <div class="card">
+                <div class="card-image">
+        
+                </div>
+                <div class="card-content">
+                  <img src="https://recipe.ishmaeljup.repl.co/Picture10.jpg" />
+                    <span class="card-title"><p>Vegan Tacos</p></span>
+                   
+                </div>
+            </div>
+            <!-- End Card Template -->
+
+          </article>
+
+          <article class="col s12 m6">
+           <p>Ingredients:</p>
+	     	<ul>
+            <li>175g pack baby corn</li>
+        <li>1 large red onion , sliced (190g)</li>
+          <li>1 red pepper , deseeded and roughly chopped</li>
+         <li>½ tsp cumin seeds</li>
+          <li>2 tsp olive oil</li>
+        <li>1large ripe kiwi , halved lengthways (110g)</li>
+          <li>1large tomato , halved (115g)</li>
+         <li>100g wholemeal flour , plus extra for rolling</li>
+         <li>1 large garlic clove</li>
+         <li>15g fresh coriander , chopped</li>
+         <li>1 tsp vegan bouillon powder</li>
+         <li>½ tsp smoked paprika</li>
+          <li>85g red cabbage , finely shredded</li>
+      </ul>
+            
+		<br></br>
+		<p>
+		Instructions: </p>
+		<ol>
+		<li>Heat oven to 220C/200C fan/gas 7. Pile the corn, red onion and pepper into a large shallow roasting tin and toss with the cumin seeds and oil. Add the kiwi and tomato on one side of the tin and roast for 20 mins.</li>
+		<li>Meanwhile, mix 60ml water into the flour with the blade of a knife to make a dough. Knead briefly until smooth, then cut equally into four and roll out each piece on a lightly floured surface into a 16cm round tortilla. Cover with a tea towel to stop them drying out.</li>
+		<li> Remove the cooked tomato and kiwi from the tin and return the veg to the oven for 10 mins. Remove the skin from the kiwi and scoop the flesh into a bowl with the tomato, garlic, half the coriander, bouillon and paprika. Use a hand blender to blitz to a smooth salsa.</li>
+         <li>Heat a large non-stick frying pan, without oil, and cook the tortillas one at a time for a minute on one side and about 10 seconds on the other, until you see them puff up a little. Spread a tortilla with some salsa, top with cabbage and roasted veg, then scatter with the remaining coriander. Add a spoonful more salsa and eat with your hands.</li>             
+          </article> 
+      </div>
+         
+ 
+          </section>
+         </div>
+
+        </div>
+
+        <div class="w3-third w3-serif">
+         <section id="Sandwiches">
+           <h1>Sandwiches</h1>
+
+           <div class="card">
+                <div class="card-image">
+                    <img class="black" 
+                </div>
+                <div class="card-content">
+                  <img src="https://recipe.ishmaeljup.repl.co/Picture11.jpg" />
+                    <span class="card-title"><p>Fried egg and cheese</p></span>
+                  <p>Ingredients:</p>
+		            <ul>
+		              <li>4 slices of bread.</li>
+                  <li>2 eggs.</li>
+                  <li>4 tbsp of butter.</li>
+                  <li>2 strips of bacon.</li>
+                  <li>4 slices of cheddar cheese.</li>
+                  <li>4 tbsp of vegetable oil.</li>
+		            </ul>
+		          <br></br>
+		          <p>Instructions: </p>
+		          <ol>
+		            <li>Place two slices of cheese within two slices of bread at an angle so that the edges hangover the sides of the bread. </li>
+		            <li>Heat the skillet over medium heat.</li>
+		            <li>Butter the outside of the bread with 1 tbsp of butter. </li>
+                <li>Press the buttered side of the sandwich onto the heated skillet, do this until the bread is golden brown and the cheese begins to melt.</li>
+                <li>Butter the slice facing up with 1 tbsp of butter.</li>
+                <li>Repeat step 4.</li>
+                <li>Repeat steps 1-6 for the other two slices of bread.</li>
+                <li>Place a pan over medium heat.</li>
+                <li>Add 2 tbsp of vegetable oil to the pan,cook 1 strip of bacon until it barely crips, do this for both sides.</li>
+                <li>Crack 2 eggs on top of the bacon, continue to cook for 5 minutes.</li>
+                <li>Open the sandwich and place the bacon and eggs.</li>
+                <li>Repeat step 11..</li>
+              </ol>
+          </article> 
+            </div>
+           </div>
+              <br><br>
+
+             <div class="card">
+                <div class="card-image">
+                    <img class="black" src="https://recipe.ishmaeljup.repl.co/Picture6.jpg" alt="Smokies Image">  
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><p>Tuna</p></span>
+                  <p>Ingredients:</p>
+		            <ul>
+		              <li>2 6 0z cans of tuna in water, drained.</li>
+                  <li>½ cup of chopped celery.</li>
+                  <li>¼ cup of chopped onions.</li>
+                  <li>½ cup of mayonnaise or salad dressing.</li>
+                  <li>1 tsp of lemon juice.</li>
+                  <li>¼ tsp of salt.</li>
+                  <li>¼ tsp of pepper.</li>
+                  <li>8 slices of bread.</li>
+		            </ul>
+		          <br></br>
+		          <p>Instructions: </p>
+		          <ol>
+		            <li>In a medium sized bowl add the tuna, onions, mayonnaise, lemon juice,celery, salt and pepper, then mix said ingredients together.
+</li>
+		            <li>Respread tuna mixture on 4 bread slices, then top with remaining bread slices.</li>
+		            
+              </ol>
+          </article> 
+            </div>
+             </div>
+        </div>
+              <br><br>
+
+         </section>
+        </div>
+
+        <div class="w3-third w3-serif">
+         <section id="OnePot">
+           <h1>One Pot Meals</h1>
+            <!-- Begin Card Template -->
+            <div class="card">
+                <div class="card-image">
+                    <img class="black" src="garlic-butter-chicken-13.jpg" alt="Chicken Image">  
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><p>Garlic Butter Chicken</p></span>
+                   
+                </div>
+            </div>
+            <!-- End Card Template -->
+
+          </article>
+
+          <article class="col s12 m6">
+           <p>Ingredients:</p>
+		<ul>
+		<li>4 boneless skinless chicken breasts.</li>
+                 <li>1 tbsp of Dijon or spicy brown mustard.</li>
+                 <li>2 cups potatoes cut into 1/2 - 1 inch pieces</li>
+                  <li>12 ounces fresh green beans or 1 14-oz bag frozen vegetables, any variety</li>
+                   <li>1 12-oz pkg. Creamy Garlic Butter Chicken Campbell's Oven Sauce</li>
+                  
+		</ul>
+		<br></br>
+		<p>
+		Instructions: </p>
+		<ol>
+            
+		<li> Preheat oven to 400º F. Place chicken breasts in a 9x13" baking dish. Arrange potatoes around the chicken and then top with the green beans. Spread Campbell's Oven Sauce over the top of the green beans.</li>
+		<li>Bake for 40 minutes in preheated oven, or until chicken juices run clear and potatoes are fork-tender. Let stand 5 minutes before serving. Serve up on plates and enjoy!</li>
+		
+                      
+          </article> 
+      </div>
+           </div>
+
+         </section>
+         </div>
+        </div>
+
+        <div class="w3-third w3-serif">
+         <section id="Desserts">
+           <h1>Desserts</h1>
+
+           <div class="card">
+                <div class="card-image">
+                    <img class="black" src="https://recipe.ishmaeljup.repl.co/Picture6.jpg" alt="Smokies Image">  
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><p>Frosty Watermelon Ice</p></span>
+                  <p>Ingredients:</p>
+		            <ul>
+		              <li>1 teaspoon unflavored gelatin</li>
+                  <li>2 tablespoons honey</li>
+                  <li>2 tablespoons water</li>
+                  <li>2 tablespoons lime juice</li>
+                  <li>4 cups cubed seedless watermelon, divided</li>
+		            </ul>
+		          <br></br>
+		          <p>Instructions: </p>
+		          <ol>
+		            <li>In a microwave-safe bowl, sprinkle gelatin over water; let stand 1 minute. Microwave on high for 40 seconds. Stir and let stand until gelatin is completely dissolved, 1-2 minutes.</li>
+		            <li>Place lime juice, honey and gelatin mixture in a blender. Add 1 cup watermelon; cover and process until blended. Add remaining watermelon, 1 cup at a time, processing until smooth after each addition.</li>
+		            <li>Transfer to a shallow dish; freeze until almost firm. In a chilled bowl, beat with an electric mixer until mixture is bright pink. Divide among 4 serving dishes; freeze, covered, until firm. Remove from freezer 15-20 minutes before serving.</li>
+              </ol>
+          </article> 
+            </div>
+           </div>
+              <br><br>
+             
+             <div class="card">
+                <div class="card-image">
+                    <img class="black" src="https://recipe.ishmaeljup.repl.co/Picture6.jpg" alt="Strawberries Image">  
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><p>Strawberry Pillows</p></span>
+                  <p>Ingredients:</p>
+		            <ul>
+		              <li>1 cup butter, softened</li>
+                  <li>11-1/2 teaspoons vanilla extract</li>
+                  <li>1 package (8 ounces) cream cheese, softened</li>
+                  <li>1 cup sugar</li>
+                  <li>2-3/4 cups all-purpose flour</li>
+                  <li>2/3 cup strawberry preserves</li>
+		            </ul>
+		          <br></br>
+		          <p>Instructions: </p>
+		          <ol>
+		            <li>Cream butter, cream cheese and sugar until light and fluffy. Beat in vanilla. Gradually beat in flour. Divide dough into four portions. Shape each into a disk; wrap in plastic. Refrigerate until firm enough to roll, about 2 hours.</li>
+		            <li>Preheat oven to 375°. On a floured surface, roll each portion of dough to 1/8-in. thickness. Cut with a floured 2-in. round cookie cutter. Place half of the circles onto ungreased baking sheets. Place 1/2 teaspoon preserves in the center of each circle; top with remaining circles and press edges lightly with a fork to seal. Cut slits in the top of each cookie. Bake until edges are light brown, 7-9 minutes. Remove from pans to wire racks to cool.</li>
+		            
+              </ol>
+          </article> 
+            </div>
+             </div>
+              <br><br>
+
+
+         </section>
+         </div>
+
+         <div class="w3-third w3-serif">
+          <section id="Appetitzers">
+            <h1>Appetitizers</h1>
+            <div class="card">
+                <div class="card-image">
+                    <img class="black" src="https://recipe.ishmaeljup.repl.co/Picture6.jpg" alt="Smokies Image">  
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><p>Bacon Wrapped Smokies</p></span>
+     <img src="https://recipe.ishmaeljup.repl.co/Picture7.jpg" />         
+                  <p>Ingredients:</p>
+		            <ul>
+		              <li>1 pound sliced bacon, cut into thirds</li>
+                  <li>1 tbsp of Dijon or spicy brown mustard.</li>
+                  <li>1 (14 ounce) package beef cocktail wieners</li>
+                  <li>¾ cup brown sugar, or to taste</li>
+		            </ul>
+		          <br></br>
+		          <p>Instructions: </p>
+		          <ol>
+		            <li>Preheat the oven to 325 degrees F (165 degrees C).</li>
+		            <li>Refrigerate 2/3 of the bacon until needed. It is easier to wrap the wieners with cold bacon. Wrap each cocktail wiener with a piece of bacon and secure with a toothpick. Place on a large baking sheet. Sprinkle brown sugar generously over all.</li>
+		            <li>Bake for 40 minutes in the preheated oven, until the sugar is bubbly. To serve, place the wieners in a slow cooker and keep on the low setting.</li>
+              </ol>
+          </article> 
+            </div>
+            </div>
+              <br><br>
+                <div class="card">
+                <div class="card-image">
+                    <img class="black" src="baconsmokies.jpg" alt="Deviled Eggs Image">  
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><p>Bacon Deviled Eggs</p></span>
+                  <p>Ingredients:</p>
+                  <ul>
+                    <li>12 eggs</li>
+                    <li>1 ½ cups thinly sliced napa cabbage</li>
+                    <li>¼ cup shredded carrots</li>
+                    <li>3 green onions, chopped</li>
+                    <li>12 fresh green beans, cut into 1/2 inch pieces</li>
+                    <li>1 small green bell pepper, cut into thin strips</li>
+                    <li>1 small zucchini, cut into thin strips</li>
+                    <li>3 eggs, lightly beaten</li>
+                    <li>¾ cup all-purpose flour</li>
+                    <li>¾ cup chicken stock</li>
+                    <li>2 teaspoons soy sauce</li>
+                    <li>1 teaspoon vegetable oil</li>
+                    <li>¼ teaspoon toasted sesame oil</li>
+                  </ul>
+                  <br></br>
+		              <p>Instructions: </p>
+                  <ol>
+                    <li>In a large bowl, mix chicken, cabbage, carrots, green onions, green beans, green bell pepper and zucchini. In a separate bowl, beat together eggs, flour, chicken stock and soy sauce. Pour batter over chicken mixture and toss to thoroughly coat.</li>
+                    <liMix vegetable oil and sesame oil in a skillet over medium heat. Scoop about 1/4 cup batter into skillet, enough to make a 2 1/2 inch circle. Cover and cook 4 minutes, or until bottom is golden brown. Flip and continue cooking 4 minutes, or until cooked through. Drain on paper towels.</li>
+                  </ol>                      
+                </article> 
+                </div>
+                </div>
+                   <br><br>
+                <div class="card">
+                <div class="card-image">
+                  <img src="https://recipe.ishmaeljup.repl.co/Picture8.png" />
+                    <img class="black" src="baconsmokies.jpg" alt="Okonomiyaki Image">  
+                </div>
+                <div class="card-content">
+                    <span class="card-title"><p>Okonomiyaki</p></span>
+                  <p>Ingredients:</p>
+                  <ul>
+                    <li>1 cup chopped cooked chicken</li>
+                    <li>1 ½ cups thinly sliced napa cabbage</li>
+                    <li>¼ cup shredded carrots</li>
+                    <li>3 green onions, chopped</li>
+                    <li>12 fresh green beans, cut into 1/2 inch pieces</li>
+                    <li>1 small green bell pepper, cut into thin strips</li>
+                    <li>1 small zucchini, cut into thin strips</li>
+                    <li>3 eggs, lightly beaten</li>
+                    <li>¾ cup all-purpose flour</li>
+                    <li></li>
+                  </ul>
+                  <br></br>
+		              <p>Instructions: </p>
+                  <ol>
+                    <li>Place eggs in a saucepan, and cover with cold water. Bring water to a boil and immediately remove from heat. Cover, and let eggs stand in hot water for 10 to 12 minutes. Remove from hot water, and cool. To cool more quickly, rinse eggs under cold running water.</li>
+                    <li>Meanwhile, place bacon in a large, deep skillet. Cook over medium-high heat until evenly brown. Alternatively, wrap bacon in paper towels and cook in the microwave for about 1 minute per slice. Crumble and set aside.</li>
+                    <li>Peel the hard-cooked eggs, and cut in half lengthwise. Remove yolks to a small bowl. Mash egg yolks with mayonnaise, crumbled bacon and cheese. Stir in mustard. Fill egg white halves with the yolk mixture and refrigerate until serving.</li>
+                  </ol>                      
+                </article> 
+                </div>
+                </div>
+         </div>
+          </section>
+        <footer>
+      </footer>
+      <!--Storing form data -Emelia -->
+      <script>
+        async function postData(url, data){
+          try{
+            let response = await fetch(
+              url, 
+              {
+                method: 'POST',
+                body: JSON.stringify(data),//convert data to JSON string
+                headers: { 'Content-Type':'application/json' }// JSON data
+                },
+                );
+              let result = await response.text();// Get message from response
+              console.log(result);
+              }catch(error){
+              console.log(error);//check errors and log
+            }
+          }
+
+        function submit(event){
+          event.preventDefault();//prevents page redirection
+
+          const formSub = event.target;
+          const formData = new FormData(formSub);//get form data
+          const data = Object.fromEntries(formData);//convert form data to object
+
+          postData('https://nmendezapps.firebaseio.com/users.json', data);
+          }
+        //attach the submit function to the submit event of formSub    
+        document.forms['formSub'].addEventListener('submit', submit);
+      </script>
+      <!-- End of Subscription script -Emelia -->
+    <script>
+         M.AutoInit();
+    </script>
+</body>
+</html>
